@@ -38,7 +38,7 @@ const Header = () => {
       </div>
       <nav style={navStyle}>
         <Link to="/home">Home</Link>
-        <Link to="/profile">My Profile</Link>
+        <Link to="/my-profile">My Profile</Link>
         <Link to="/create-post">Post</Link>
         <Link to="/event-manager">Event</Link>
         <Link to="/about-us">About Us</Link>

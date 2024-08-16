@@ -10,14 +10,20 @@ import LoginForm from './components/loginForm/LoginForm';
 import PasswordResetForm from './components/passwordReset/PasswordResetForm';
 import RegistrationForm from './components/registrationForm/RegistrationForm';
 import EventManager from './pages/EventManager';
+import Myprofile from './pages/Myprofile'; // Match the import name with your file name
+
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* The LandingPage is the root route */}
         <Route path="/" element={<LandingPage />} />
+
+        {/* Layout as the parent route for nested routes */}
         <Route path="/" element={<Layout />}>
           <Route path="home" element={<Home />} />
+          <Route path="my-profile" element={<Myprofile />} /> 
           <Route path="create-post" element={<CreatePost />} />
           <Route path="event-manager" element={<EventManager />} />
           <Route path="about-us" element={<AboutUs />} />
