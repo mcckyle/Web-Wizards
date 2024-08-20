@@ -1,33 +1,33 @@
-// src/components/Header.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../asserts/ShowMO.png'; // Replace 'your-logo.png' with your actual image file name
+import logo from '../asserts/ShowMO.png';
+import Logout from './logOut/LogOutAction'; // Import the Logout component
 
 const Header = () => {
   const headerStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '0 10px', // Adjust the padding to reduce upper space
-    backgroundColor: '#f5f5dc', // Adjust the background color as needed
+    padding: '0 10px',
+    backgroundColor: '#f5f5dc',
   };
 
   const navStyle = {
     display: 'flex',
-    gap: '10px'
+    gap: '10px',
   };
 
   const imgStyle = {
-    width: '60px', // Increase the width
-    height: '60px', // Increase the height
+    width: '60px',
+    height: '60px',
     marginRight: '10px',
-    borderRadius: '50%', // Make the image round
-    objectFit: 'full' // Ensure the image covers the container
+    borderRadius: '50%',
+    objectFit: 'cover', // Changed from 'full' to 'cover' to fit the container
   };
 
   const titleStyle = {
     margin: '0',
-    fontSize: '1.5em' // Reduce the font size
+    fontSize: '1.5em',
   };
 
   return (
@@ -43,8 +43,8 @@ const Header = () => {
         <Link to="/event-manager">Event</Link>
         <Link to="/about-us">About Us</Link>
         <Link to="/contact-us">Connect</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        {/* Add the Logout component */}
+        <Logout /> {/* This will render the Logout button */}
       </nav>
     </header>
   );

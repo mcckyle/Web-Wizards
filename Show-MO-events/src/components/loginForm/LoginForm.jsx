@@ -95,7 +95,7 @@ const LoginForm = () => {
           setLoginErrors({ username: '', password: '', general: '' });
 
           // Navigate to a different page if needed
-                window.location.href = '/'
+                window.location.href = '/home'
           // e.g., window.location.href = '/home';
         }
       } catch (error) {
@@ -141,6 +141,10 @@ const LoginForm = () => {
                  <div className="forgot-password">
                    <Link to="/forgot-password">Forgot Password?</Link>
                  </div>
+
+                  <div className="forgot-password">
+                      <Link to="register">Register Here?</Link>
+                  </div>
 
            {/* Google Login Button */}
            <div className="google-login">
