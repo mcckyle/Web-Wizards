@@ -43,8 +43,6 @@ const Header = () => {
         <Link to="/event-manager">Event</Link>
         <Link to="/about-us">About Us</Link>
         <Link to="/contact-us">Connect</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
       </nav>
     </header>
   );
