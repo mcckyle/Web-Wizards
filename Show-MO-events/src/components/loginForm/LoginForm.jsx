@@ -48,6 +48,10 @@ const LoginForm = () => {
 
     if (validateLoginForm()) {
       try {
+		  //Store username in local storage...
+		    const username = document.getElementById('username').value;
+			
+		  
         // Make POST request using Fetch API
         const response = await fetch('http://localhost:8080/api/auth/login', {
           method: 'POST',
@@ -79,6 +83,10 @@ const LoginForm = () => {
             }));
           }
         } else {
+			
+		    //Store username in local storage...
+		    localStorage.setItem('username', username);
+			
           // Successful login
           console.log('Login successful:', data.message);
 
