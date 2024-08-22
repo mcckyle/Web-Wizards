@@ -35,3 +35,8 @@ public class LoginFormDTO {
     }
 
 }
+/*
+ * Second round of validation with the annotations
+ * Sets private fields username and password.
+ * Uses getters and setters to retrieve and update information.
+ */
