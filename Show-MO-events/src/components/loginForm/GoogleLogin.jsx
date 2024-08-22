@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import "./Google.css";
-
+// had to bring in my client id here for the connection to work //
 const GoogleLogin = () => {
   const YOUR_CLIENT_ID = '562269835682-vjv4akf84462tffrat30qqniqedoel02.apps.googleusercontent.com';
   const YOUR_REDIRECT_URI = 'http://localhost:5173'; // Ensure this matches your configuration

@@ -16,13 +16,13 @@ const LoginForm = () => {
     password: '',
     general: ''
   });
-
+// initialize empty strings and stores the state of the data, stores validation errors as well//
   // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
-
+// updates the from base on the name typed in //
   // Validate login form
   const validateLoginForm = () => {
     let valid = true;
@@ -41,8 +41,15 @@ const LoginForm = () => {
     setLoginErrors(errors);
     return valid;
   };
-
+// checks if the fields are filled out and sends an error message, witch is a false return.
   // Handle form submission
+
+   /*
+       * Triggers when the form is submitted, prevents default
+       * Makes a POST request to lclhst:8080/api/auth/login.
+       * If login is successful it will then store the data in localStorage and route to the /home page //
+       * Will set a message if needed for the loginErrors state basses off of the HTTP response //
+       */
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
