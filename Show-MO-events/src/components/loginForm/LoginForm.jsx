@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import GoogleLogin from './GoogleLogin'; // Adjust the path if necessary
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Login.css';
 
-
-
-const LoginForm = () => {
+const LoginForm = ({ setAuthenticated }) => {
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
@@ -16,13 +14,15 @@ const LoginForm = () => {
     password: '',
     general: ''
   });
-// initialize empty strings and stores the state of the data, stores validation errors as well//
+
+  const navigate = useNavigate(); // Initialize useNavigate
+
   // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
-// updates the from base on the name typed in //
+
   // Validate login form
   const validateLoginForm = () => {
     let valid = true;
@@ -41,24 +41,13 @@ const LoginForm = () => {
     setLoginErrors(errors);
     return valid;
   };
-// checks if the fields are filled out and sends an error message, witch is a false return.
-  // Handle form submission
 
-   /*
-       * Triggers when the form is submitted, prevents default
-       * Makes a POST request to lclhst:8080/api/auth/login.
-       * If login is successful it will then store the data in localStorage and route to the /home page //
-       * Will set a message if needed for the loginErrors state basses off of the HTTP response //
-       */
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
     if (validateLoginForm()) {
       try {
-		  //Store username in local storage...
-		    const username = document.getElementById('username').value;
-			
-		  
         // Make POST request using Fetch API
         const response = await fetch('http://localhost:8080/api/auth/login', {
           method: 'POST',
@@ -68,7 +57,7 @@ const LoginForm = () => {
           body: JSON.stringify(loginData),
           credentials: 'include', // Include credentials like cookies
         });
-// spread operator to copy the properties of the object //
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -90,20 +79,12 @@ const LoginForm = () => {
             }));
           }
         } else {
-			
-		    //Store username in local storage...
-		    localStorage.setItem('username', username);
-			
-          // Successful login
-          console.log('Login successful:', data.message);
-
-          // Clear the form or navigate if needed
-          setLoginData({ username: '', password: '' });
-          setLoginErrors({ username: '', password: '', general: '' });
-
-          // Navigate to a different page if needed
-                window.location.href = '/home'
-          // e.g., window.location.href = '/home';
+          // Store username in local storage
+          localStorage.setItem('username', loginData.username);
+          // Set authenticated state
+          setAuthenticated(true);
+          // Navigate to home page
+          navigate('/home');
         }
       } catch (error) {
         console.error('Error logging in:', error);
@@ -141,24 +122,25 @@ const LoginForm = () => {
         />
         {loginErrors.password && <p className="error">{loginErrors.password}</p>}
      </div>
-           {loginErrors.general && <p className="error">{loginErrors.general}</p>}
-           <button type="submit" className="btn btn-primary">Login</button>
+     {loginErrors.general && <p className="error">{loginErrors.general}</p>}
+     <button type="submit" className="btn btn-primary">Login</button>
 
-           {/* Forgot Password Link */}
-                 <div className="forgot-password">
-                   <Link to="/forgot-password">Forgot Password?</Link>
-                 </div>
+     {/* Forgot Password Link */}
+     <div className="forgot-password">
+       <Link to="/forgot-password">Forgot Password?</Link>
+     </div>
 
-                  <div className="forgot-password">
-                      <Link to="register">Register Here?</Link>
-                  </div>
+     {/* Register Link */}
+     <div className="forgot-password">
+       <Link to="/register">Register Here?</Link>
+     </div>
 
-           {/* Google Login Button */}
-           <div className="google-login">
-             <p>Login or SignUp with: Google</p>
-             <GoogleLogin />
-           </div>
-         </form>
+     {/* Google Login Button */}
+     <div className="google-login">
+       <p>Login or SignUp with: Google</p>
+       <GoogleLogin />
+     </div>
+    </form>
   );
 };
 
