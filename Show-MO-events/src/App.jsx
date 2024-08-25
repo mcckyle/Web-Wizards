@@ -95,7 +95,7 @@ function App() {
                 <Route path="/" element={<LoginForm />} />
                 <Route path="/" element={<Layout />}>
                     <Route path="home" element={<Home />} />
-                    <Route path="create-post" element={<CreatePost />} />
+                    <Route path="create-post" element={<PostForm />} />
                     <Route path="event-manager" element={<EventManager />} />
                     <Route path="about-us" element={<AboutUs />} />
                     <Route path="contact-us" element={<ContactUs />} />
@@ -109,5 +109,7 @@ function App() {
         </BrowserRouter>
     );
 }
+// --------React-route-DOM---- react-router-dom is a library in React that enables you to implement dynamic routing in your web applications. It allows you to define multiple routes within your app 
+// and lets the user navigate between different pages or views without reloading the entire page.
 
 export default App;
