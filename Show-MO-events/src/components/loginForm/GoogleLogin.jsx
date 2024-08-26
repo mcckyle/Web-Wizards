@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Ensure you import useNavigate
-import './Google.css';
+import './Google.css'; // Ensure you import the CSS file
 
 // Google OAuth 2.0 login component
 const GoogleLogin = ({ onSuccess }) => {
@@ -67,9 +67,12 @@ const GoogleLogin = ({ onSuccess }) => {
   }, [navigate, onSuccess]);
 
   return (
-    <button className="google-login-button" onClick={oauth2SignIn}>
-      <span>Login with Google</span>
-    </button>
+    <div className="google-login">
+      <p>Sign in with Google</p>
+      <button className="google-login-button" onClick={oauth2SignIn}>
+        <span>Login with Google</span>
+      </button>
+    </div>
   );
 };
 

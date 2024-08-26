@@ -6,7 +6,7 @@ const PostForm = ({ addPost}) => {
     const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [posts, setPost] = useState([]);
-	
+
 	const handleSubmit = async (e) => {
 	    e.preventDefault();
 		const response = await fetch('http://localhost:8080/api/posts/create', {
@@ -25,7 +25,7 @@ const PostForm = ({ addPost}) => {
 			console.log('Failed to create post.');
 		}
 	};
-	
+
 	return (
 	<div>
 	<form onSubmit = {handleSubmit}>
@@ -43,5 +43,5 @@ const PostForm = ({ addPost}) => {
 	</div>
 	);
 };
-	
+
 export default PostForm;
