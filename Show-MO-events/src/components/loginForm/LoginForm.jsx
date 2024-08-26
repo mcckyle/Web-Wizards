@@ -104,7 +104,7 @@ const LoginForm = ({ setAuthenticated }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
@@ -135,20 +135,16 @@ const LoginForm = ({ setAuthenticated }) => {
         {/* Google Login Button */}
         <div className="google-login">
           <p>Or login with:</p>
-          {/* Wrap the GoogleLogin component in a div */}
           <GoogleLogin onSuccess={handleGoogleLoginSuccess} />
         </div>
+
+        {/* Forgot Password and Register Links */}
+        <div className="form-links">
+          <Link to="/forgot-password">Forgot Password?</Link>
+          <span> | </span>
+          <Link to="/register">Register Here?</Link>
+        </div>
       </form>
-
-      {/* Forgot Password Link */}
-      <div className="forgot-password">
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </div>
-
-      {/* Register Link */}
-      <div className="forgot-password">
-        <Link to="/register">Register Here?</Link>
-      </div>
     </div>
   );
 };
