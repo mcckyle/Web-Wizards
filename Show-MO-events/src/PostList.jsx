@@ -10,10 +10,10 @@ const PostList = ({posts, addPost, updatePost }) => {
 	const [editContent, setEditContent] = useState('');
 	const [isEditing, setIsEditing] = useState(false);
     const [visibleComments, setVisibleComments] = useState({});
-	
+
 	const username = localStorage.getItem('username');
 	const [userId, setUserId] = useState(null);
-	
+
 	const fetchPosts = () => {
 		fetch('http://localhost:8080/api/posts')
 		.then(response => {
@@ -21,7 +21,7 @@ const PostList = ({posts, addPost, updatePost }) => {
 			{
 				throw new Error('Network response was not OK during post fetching...');
 			}
-			
+
 			return response.json();
 		})
 		.then(data => {
@@ -30,16 +30,16 @@ const PostList = ({posts, addPost, updatePost }) => {
 		})
 		.catch(error => console.error('Error fetching posts: ', error));
 	};
-	
+
 	//Fetch posts...
 	useEffect(() => {
 		fetchPosts();
 	}, []);
-	
+
 	//Fetch user data...
 	useEffect(() => {
 		const fetchUserId = async () => {
-			
+
 			if(username)
 			{
 				try
@@ -59,13 +59,13 @@ const PostList = ({posts, addPost, updatePost }) => {
 			}
 		};
 		fetchUserId();
-		
+
 		}, [username]);
-		
-	
+
+
 	const handleTitleChange = (e) => setEditTitle(e.target.value);
 	const handleContentChange = (e) => setEditContent(e.target.value);
-	
+
 	const handleEdit = (index) => {
 		const postToEdit = postList[index];
 		setEditTitle(postToEdit.title);
@@ -73,25 +73,25 @@ const PostList = ({posts, addPost, updatePost }) => {
 		const updatedPosts = postList.map((post, i) =>
 		    i === index ? { ...post, title: editTitle, content: editContent, isEditing : true } : post
 			);
-			
+
 			setPostList(updatedPosts);
 	};
-	
+
 	const handleEditSubmit = (e, index) => {
 		e.preventDefault(); //Prevent the default form submission behavior...
 		//Submit logic goes here...
-		
+
 		const updatedPosts = postList.map((post, i) =>
 		    i === index ? { ...post, title: editTitle, content: editContent, isEditing : false } : post
 			);
-			
+
 			setPostList(updatedPosts);
 			setEditTitle("");
 			setEditContent("");
-			
+
 			//Get the updated post's ID...
 			const postID = postList[index].id;
-			
+
 			//Send a PUT request to our backend using fetch API...
 			fetch(`http://localhost:8080/api/posts/${postID}`, {
 				method: 'PUT',
@@ -111,8 +111,8 @@ const PostList = ({posts, addPost, updatePost }) => {
 				console.error('Error updating the post: ', error);
 			});
 	};
-	
-	
+
+
 	const handleEditClick = (index) => {
 		//Handle the edit functionality...
 		setPostList((prevPosts) =>
@@ -121,13 +121,13 @@ const PostList = ({posts, addPost, updatePost }) => {
 		    )
 		);
 	};
-	
+
 	const handleDelete = async(index) => {
 		try
 		{
 			//Get the updated post's ID...
 			const postID = postList[index].id;
-			
+
 			const response = await fetch(`http://localhost:8080/api/posts/${postID}`, {
 				method: 'DELETE',
 			});
@@ -147,9 +147,9 @@ const PostList = ({posts, addPost, updatePost }) => {
 			console.error('There was an error deleting the post!', error);
 		}
 	};
-	
+
 	const defaultUserId = 'guest'; //Default user ID for non-signed in users...
-	
+
 	const handleViewComments = (index) => {
 		//Logic to show/hide comments goes here...
 		setVisibleComments((prevState) => ({
@@ -157,12 +157,12 @@ const PostList = ({posts, addPost, updatePost }) => {
 			[index]: !prevState[index],
 		}));
 	};
-	
+
 	const fetchUserData = async(username) => {
 		try
 		{
 		    const response = await fetch(`http://localhost:8080/api/auth/user?username=${username}`);
-		    
+
 			if(response.ok)
 			{
 				const userData = await response.json();
@@ -180,7 +180,7 @@ const PostList = ({posts, addPost, updatePost }) => {
 			return null;
 		}
 	};
-			
+
     return (
 	    <div>
 		{postList.map((post,index) => (
@@ -198,7 +198,7 @@ const PostList = ({posts, addPost, updatePost }) => {
 				/>
 			<button type="submit">Save</button>
 	    </form>
-		
+
 		) : (
 		<div>
 		<h2>{post.title}</h2>

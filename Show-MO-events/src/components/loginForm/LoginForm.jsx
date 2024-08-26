@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import GoogleLogin from './GoogleLogin'; // Adjust the path if necessary
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Login.css';
 
-
-
-const LoginForm = () => {
+const LoginForm = ({ setAuthenticated }) => {
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
@@ -16,6 +14,8 @@ const LoginForm = () => {
     password: '',
     general: ''
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Handle input change
   const handleChange = (e) => {
@@ -48,10 +48,6 @@ const LoginForm = () => {
 
     if (validateLoginForm()) {
       try {
-		  //Store username in local storage...
-		    const username = document.getElementById('username').value;
-			
-		  
         // Make POST request using Fetch API
         const response = await fetch('http://localhost:8080/api/auth/login', {
           method: 'POST',
@@ -61,7 +57,7 @@ const LoginForm = () => {
           body: JSON.stringify(loginData),
           credentials: 'include', // Include credentials like cookies
         });
-// spread operator to copy the properties of the object //
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -83,20 +79,12 @@ const LoginForm = () => {
             }));
           }
         } else {
-			
-		    //Store username in local storage...
-		    localStorage.setItem('username', username);
-			
-          // Successful login
-          console.log('Login successful:', data.message);
-
-          // Clear the form or navigate if needed
-          setLoginData({ username: '', password: '' });
-          setLoginErrors({ username: '', password: '', general: '' });
-
-          // Navigate to a different page if needed
-                window.location.href = '/home'
-          // e.g., window.location.href = '/home';
+          // Store username in local storage
+          localStorage.setItem('username', loginData.username);
+          // Set authenticated state
+          setAuthenticated(true);
+          // Navigate to home page
+          navigate('/home');
         }
       } catch (error) {
         console.error('Error logging in:', error);
@@ -108,50 +96,56 @@ const LoginForm = () => {
     }
   };
 
+  // Handle Google login success
+  const handleGoogleLoginSuccess = () => {
+    setAuthenticated(true);
+    navigate('/home');
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          className="form-control"
-          value={loginData.username}
-          onChange={handleChange}
-        />
-        {loginErrors.username && <p className="error">{loginErrors.username}</p>}
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="form-control"
-          value={loginData.password}
-          onChange={handleChange}
-        />
-        {loginErrors.password && <p className="error">{loginErrors.password}</p>}
-     </div>
-           {loginErrors.general && <p className="error">{loginErrors.general}</p>}
-           <button type="submit" className="btn btn-primary">Login</button>
+    <div>
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            className="form-control"
+            value={loginData.username}
+            onChange={handleChange}
+          />
+          {loginErrors.username && <p className="error">{loginErrors.username}</p>}
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="form-control"
+            value={loginData.password}
+            onChange={handleChange}
+          />
+          {loginErrors.password && <p className="error">{loginErrors.password}</p>}
+        </div>
+        {loginErrors.general && <p className="error">{loginErrors.general}</p>}
+        <button type="submit" className="btn btn-primary">Login</button>
 
-           {/* Forgot Password Link */}
-                 <div className="forgot-password">
-                   <Link to="/forgot-password">Forgot Password?</Link>
-                 </div>
+        {/* Google Login Button */}
+        <div className="google-login">
+          <p>Or login with:</p>
+          <GoogleLogin onSuccess={handleGoogleLoginSuccess} />
+        </div>
 
-                  <div className="forgot-password">
-                      <Link to="register">Register Here?</Link>
-                  </div>
-
-           {/* Google Login Button */}
-           <div className="google-login">
-             <p>Login or SignUp with: Google</p>
-             <GoogleLogin />
-           </div>
-         </form>
+        {/* Forgot Password and Register Links */}
+        <div className="form-links">
+          <Link to="/forgot-password">Forgot Password?</Link>
+          <span> | </span>
+          <Link to="/register">Register Here?</Link>
+        </div>
+      </form>
+    </div>
   );
 };
 

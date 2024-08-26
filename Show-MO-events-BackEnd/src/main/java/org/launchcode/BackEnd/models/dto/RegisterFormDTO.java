@@ -15,3 +15,7 @@ public class RegisterFormDTO extends LoginFormDTO {
     }
 
 }
+/*
+ * Second round of validation with the annotations
+ * Ensures that the password is verified correctly with the registration from/ form has two fields to verify.
+ */

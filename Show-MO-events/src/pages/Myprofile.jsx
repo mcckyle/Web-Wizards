@@ -46,35 +46,35 @@ const Myprofile = () => {
                 <form onSubmit={handleSubmit}>
                     <div style={{ marginBottom: '15px' }}>
                         <label htmlFor="name">Name:</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            value={profile.name} 
-                            onChange={handleChange} 
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={profile.name}
+                            onChange={handleChange}
                             style={{ width: '100%', padding: '8px' }}
-                            required 
+                            required
                         />
                     </div>
                     <div style={{ marginBottom: '15px' }}>
                         <label htmlFor="bio">Bio:</label>
-                        <textarea 
-                            id="bio" 
-                            name="bio" 
-                            value={profile.bio} 
-                            onChange={handleChange} 
+                        <textarea
+                            id="bio"
+                            name="bio"
+                            value={profile.bio}
+                            onChange={handleChange}
                             style={{ width: '100%', padding: '8px' }}
-                            required 
+                            required
                         />
                     </div>
                     <div style={{ marginBottom: '15px' }}>
                         <label htmlFor="avatarUrl">Avatar URL:</label>
-                        <input 
-                            type="text" 
-                            id="avatarUrl" 
-                            name="avatarUrl" 
-                            value={profile.avatarUrl} 
-                            onChange={handleChange} 
+                        <input
+                            type="text"
+                            id="avatarUrl"
+                            name="avatarUrl"
+                            value={profile.avatarUrl}
+                            onChange={handleChange}
                             style={{ width: '100%', padding: '8px' }}
                         />
                     </div>
@@ -86,21 +86,21 @@ const Myprofile = () => {
             <div style={{ flex: 1, padding: '20px', maxWidth: '500px' }}>
                 <h2>My Profile</h2>
                 <div style={{ textAlign: 'center' }}>
-                    <img 
-                        src={profile.avatarUrl || 'default_avatar_url'} 
-                        alt="Avatar" 
-                        style={{ width: '150px', height: '150px', borderRadius: '50%', marginBottom: '20px' }} 
+                    <img
+                        src={profile.avatarUrl || 'default_avatar_url'}
+                        alt="Avatar"
+                        style={{ width: '150px', height: '150px', borderRadius: '50%', marginBottom: '20px' }}
                     />
                     <h3>{profile.name || 'User Name'}</h3>
                     <p>{profile.bio || 'User bio goes here...'}</p>
-                    <button 
-                        onClick={handleCreatePostClick} 
+                    <button
+                        onClick={handleCreatePostClick}
                         style={{ padding: '10px 20px', fontSize: '16px', marginRight: '10px', cursor: 'pointer' }}
                     >
                         Create Post
                     </button>
-                    <button 
-                        onClick={handleCreateEventClick} 
+                    <button
+                        onClick={handleCreateEventClick}
                         style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
                     >
                         Create Event

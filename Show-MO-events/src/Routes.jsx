@@ -9,7 +9,7 @@ import PostList from './PostList';
 const Routes = () => {
     return (
 	<Switch>
-	<Route path = "/create" component = {PostForm} />
+	<PrivateRoute path = "/create" component = {PostForm} />
 	</Switch>
 	);
 }
