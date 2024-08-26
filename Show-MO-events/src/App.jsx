@@ -95,9 +95,9 @@ function App() {
                 <Route path="/forgot-password" element={<PasswordResetForm />} />
 
                 {/* Private Routes */}
-                    <Route path="/" element={<Layout />}>
+                <Route path="/" element={<Layout />}>
                     <Route path="home" element={<PrivateRoute element={<Home />} />} />
-                    <Route path="create-post" element={<PrivateRoute element={<CreatePost />} />} />
+                    <Route path="create-post" element={<PrivateRoute element={<PostForm />} />} />
                     <Route path="event-manager" element={<PrivateRoute element={<EventManager />} />} />
                     <Route path="about-us" element={<PrivateRoute element={<AboutUs />} />} />
                     <Route path="contact-us" element={<PrivateRoute element={<ContactUs />} />} />
