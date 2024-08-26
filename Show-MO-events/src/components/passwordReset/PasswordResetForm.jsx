@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const PasswordResetForm = () => {
   const [username, setUsername] = useState('');
@@ -6,6 +7,7 @@ const PasswordResetForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +31,9 @@ const PasswordResetForm = () => {
       if (response.ok) {
         setMessage("Password reset successful");
         setError('');
+        setTimeout(() => {
+          navigate('/'); // Redirect to homepage after 2 seconds
+        }, 2000);
       } else {
         setError(data.message || "Failed to reset password. Please try again.");
         setMessage('');
@@ -53,7 +58,7 @@ const PasswordResetForm = () => {
             className="form-control"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            autoComplete="username"  // Add this line
+            autoComplete="username"
             required
           />
         </div>
@@ -66,7 +71,7 @@ const PasswordResetForm = () => {
             className="form-control"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            autoComplete="new-password"  // Add this line
+            autoComplete="new-password"
             required
           />
         </div>
@@ -79,7 +84,7 @@ const PasswordResetForm = () => {
             className="form-control"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            autoComplete="new-password"  // Add this line
+            autoComplete="new-password"
             required
           />
         </div>
