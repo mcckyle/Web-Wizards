@@ -14,16 +14,17 @@ const Logout = () => {
       });
 
       if (response.ok) {
-        // Clear any client-side tokens or session data
-        localStorage.removeItem('username');
+        // Clear client-side tokens or session data
+        localStorage.clear(); // Clears all data in localStorage
+        sessionStorage.clear(); // Clears all data in sessionStorage
 
         // Show a success message
-        setLogoutMessage('Good job, you did it!');
+        setLogoutMessage('You have been logged out successfully.');
 
         // Redirect to the root path after a short delay to show the message
         setTimeout(() => {
           setLogoutMessage(''); // Clear the message
-          navigate('/'); // Redirect to the Login
+          navigate('/'); // Redirect to the Login page
         }, 2000); // 2-second delay
       } else {
         // Handle any errors from the backend
@@ -39,7 +40,7 @@ const Logout = () => {
   return (
     <div>
       {/* Logout link */}
-      <a href="#" onClick={handleLogout} style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>
+      <a href="#" onClick={e => { e.preventDefault(); handleLogout(); }} style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>
         Logout
       </a>
 

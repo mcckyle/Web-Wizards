@@ -96,51 +96,60 @@ const LoginForm = ({ setAuthenticated }) => {
     }
   };
 
+  // Handle Google login success
+  const handleGoogleLoginSuccess = () => {
+    setAuthenticated(true);
+    navigate('/home');
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          className="form-control"
-          value={loginData.username}
-          onChange={handleChange}
-        />
-        {loginErrors.username && <p className="error">{loginErrors.username}</p>}
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            className="form-control"
+            value={loginData.username}
+            onChange={handleChange}
+          />
+          {loginErrors.username && <p className="error">{loginErrors.username}</p>}
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="form-control"
+            value={loginData.password}
+            onChange={handleChange}
+          />
+          {loginErrors.password && <p className="error">{loginErrors.password}</p>}
+        </div>
+        {loginErrors.general && <p className="error">{loginErrors.general}</p>}
+        <button type="submit" className="btn btn-primary">Login</button>
+
+        {/* Google Login Button */}
+        <div className="google-login">
+          <p>Or login with:</p>
+          {/* Wrap the GoogleLogin component in a div */}
+          <GoogleLogin onSuccess={handleGoogleLoginSuccess} />
+        </div>
+      </form>
+
+      {/* Forgot Password Link */}
+      <div className="forgot-password">
+        <Link to="/forgot-password">Forgot Password?</Link>
       </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="form-control"
-          value={loginData.password}
-          onChange={handleChange}
-        />
-        {loginErrors.password && <p className="error">{loginErrors.password}</p>}
-     </div>
-     {loginErrors.general && <p className="error">{loginErrors.general}</p>}
-     <button type="submit" className="btn btn-primary">Login</button>
 
-     {/* Forgot Password Link */}
-     <div className="forgot-password">
-       <Link to="/forgot-password">Forgot Password?</Link>
-     </div>
-
-     {/* Register Link */}
-     <div className="forgot-password">
-       <Link to="/register">Register Here?</Link>
-     </div>
-
-     {/* Google Login Button */}
-     <div className="google-login">
-       <p>Login or SignUp with: Google</p>
-       <GoogleLogin />
-     </div>
-    </form>
+      {/* Register Link */}
+      <div className="forgot-password">
+        <Link to="/register">Register Here?</Link>
+      </div>
+    </div>
   );
 };
 
