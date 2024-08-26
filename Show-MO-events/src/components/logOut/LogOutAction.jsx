@@ -11,12 +11,21 @@ const Logout = () => {
       const response = await fetch('http://localhost:8080/api/auth/logout', {
         method: 'POST',
         credentials: 'include', // Ensure cookies are sent
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.ok) {
         // Clear client-side tokens or session data
         localStorage.clear(); // Clears all data in localStorage
         sessionStorage.clear(); // Clears all data in sessionStorage
+
+        // Optionally, clear cookies (if cookies are set directly in your app)
+        // This is a workaround as direct clearing cookies may not be supported by JS in all cases.
+        document.cookie.split(';').forEach((c) => {
+          document.cookie = c.trim().split('=')[0] + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        });
 
         // Show a success message
         setLogoutMessage('You have been logged out successfully.');
