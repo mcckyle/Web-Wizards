@@ -1,0 +1,22 @@
+/* Filename: src/components/Home/Home.css */
+
+/* ====================================
+    Home Layout Styles.
+======================================= */
+.container
+{
+    text-align: center;
+    padding: 20px;
+}
+
+.title
+{
+    font-size: 2rem;
+    margin: 0;
+}
+
+.subtitle
+{
+    font-size: 1.2rem;
+    margin-top: 10px;
+}

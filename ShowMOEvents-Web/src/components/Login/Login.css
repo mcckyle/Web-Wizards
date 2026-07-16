@@ -1,0 +1,61 @@
+/* Filename: src/components/Login/Login.css */
+
+/* ====================================
+    Login Layout Styles.
+======================================= */
+.login
+{
+	max-width: 28rem;
+	margin-inline: auto;
+}
+
+/* ====================================
+    Login Form Structure Styles.
+======================================= */
+.login-form
+{
+    display: flex;
+    flex-direction: column;
+	gap: var(--space-xl);
+}
+
+/* ====================================
+    Login Header Styles.
+======================================= */
+.login-header { text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
+.login-header h1 { font-size: 1.6rem; letter-spacing: -0.02em; }
+.login-subtitle { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ====================================
+    Login Form Fields Styles.
+======================================= */
+.login-fields { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+/* ====================================
+    Login Error Message Styles.
+======================================= */
+.login-error
+{
+	font-size: 0.85rem;
+	color: var(--error);
+	text-align: center;
+	padding: 0.4rem 0.6rem;
+	border-radius: var(--radius-sm);
+	background: color-mix(in srgb, var(--error) 12%, transparent);
+}
+
+/* ====================================
+    Login Submit Button Styles.
+======================================= */
+.login-submit
+{
+	width: 100%;
+	margin-top: var(--space-sm);
+}
+
+/* ====================================
+    Login Media Query Styles.
+======================================= */
+@media (max-width: 600px) {
+	.login { padding: 1.4rem; }
+}

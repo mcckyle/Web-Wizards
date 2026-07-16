@@ -1,0 +1,69 @@
+/* Filename: src/components/Register/Register.css */
+
+/* ====================================
+    Register Layout Styles.
+======================================= */
+.register
+{
+	max-width: 28rem;
+	margin-inline: auto;
+}
+
+/* ====================================
+    Register Form Container Styles (inherits .surface).
+======================================= */
+.register-form
+{
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xl);
+}
+
+/* ====================================
+    Register Header Styles.
+======================================= */
+.register-header {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 0.5rem;
+}
+.register-header h1 { font-size: 1.6rem; letter-spacing: -0.02em; }
+.register-subtitle { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ====================================
+    Register Form Fields Styles.
+======================================= */
+.register-fields
+{
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
+/* ====================================
+    Register Error Message Styles.
+======================================= */
+.register-error {
+	font-size: 0.85rem;
+	color: var(--error);
+	text-align: center;
+	padding: 0.4rem 0.6rem;
+	border-radius: var(--radius-sm);
+	background: color-mix(in srgb, var(--error) 12%, transparent);
+}
+
+/* ====================================
+    Register Submit Button Styles.
+======================================= */
+.register-submit {
+	width: 100%;
+	margin-top: var(--space-sm);
+}
+
+/* ====================================
+    Register Media Query Styles.
+======================================= */
+@media (max-width: 600px) {
+	.register { padding: 1.4rem; }
+}

@@ -1,0 +1,185 @@
+/* Filename: src/components/Header/Header.css */
+
+/* ====================================
+    Header Shell Styles.
+======================================= */
+.header {
+  position: sticky;
+  top: 1rem;
+  width: min(calc(100% - 2rem), var(--content-wide));
+  margin-inline: auto;
+  z-index: 1000;
+  
+  display: flex;
+  justify-content: center;
+  
+  backdrop-filter: blur(22px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)), rgba(10, 14, 19, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ====================================
+    Header Inner Layout Styles.
+======================================= */
+.header-inner {
+	width: min(100%, var(--content-wide));
+	margin-inline: auto;
+	
+	min-height: 5rem;
+	padding-inline: var(--page-padding);
+	
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-xl);
+}
+.header-image
+{
+	width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ====================================
+    Header Logo Text Styles.
+======================================= */
+.logo {
+	position: relative;
+	font-size: 1.05rem;
+	font-weight: 600;
+	letter-spacing: -0.025em;
+	color: var(--text-light);
+	
+	transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+.logo:hover { color: white; opacity: 0.92; }
+
+/* ====================================
+    Header Navigation Styles.
+======================================= */
+.nav { display: flex; align-items: center; gap: 1.5rem; }
+.nav-item {
+  position: relative;
+  
+  padding-block: 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-muted);
+  
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+.nav-item:hover { color: var(--text-light); }
+.nav-item.active { color: white; }
+.nav-item::after {
+	content: "";
+	position: absolute;
+	left: 0.15rem;
+	right: 0.15rem;
+	bottom: 0.1rem;
+	
+	height: 2px;
+	border-radius: 999px;
+	background: linear-gradient(90deg, transparent, var(--primary), transparent);
+	opacity: 0;
+	transform: scaleX(0.65);
+	
+	transition: transform var(--transition-base), opacity var(--transition-base);
+}
+.nav-item.active::after { opacity: 1; transform: scaleX(1); }
+
+/* ====================================
+    Header Right Side Actions Styles.
+======================================= */
+.header-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+.auth-links { display: flex; align-items: center; gap: 0.75rem; }
+
+/* ====================================
+    Header Avatar Styles.
+======================================= */
+.avatar-wrapper { position: relative; }
+.avatar-button { padding: 0; border: none; background: transparent; cursor: pointer; }
+.avatar {
+	width: 40px;
+	height: 40px;
+	display: grid;
+	place-items: center;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 50%;
+	font-weight: 700;
+	font-size: 0.9rem;
+	background: linear-gradient(135deg, var(--primary), var(--accent));
+	color: white;
+	box-shadow: 0 10px 28px rgba(34, 197, 94, 0.22);
+	
+	transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.avatar-button:hover .avatar { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(34, 197, 94, 0.3); }
+
+/* ====================================
+    Header Avatar Dropdown Menu Styles.
+======================================= */
+.menu {
+	position: absolute;
+	top: calc(100% + 0.9rem);
+	right: 0;
+	min-width: 220px;
+	padding: 0.45rem;
+	
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)), rgba(16, 20, 26, 0.96);
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	border-radius: 20px;
+	box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38);
+	backdrop-filter: blur(20px);
+	
+	opacity: 0;
+	visibility: hidden;
+	transform-origin: top right;
+	transform: translateY(-6px) scale(0.97);
+	pointer-events: none;
+	
+	transition: opacity var(--transition-base), transform var(--transition-base), visibility 0s linear var(--transition-base);
+}
+.menu.open { visibility: visible; opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+/* Header Menu Item Styles. */
+.menu-item {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	padding: 0.8rem 0.95rem;
+	font-size: 0.9rem;
+	font-weight: 500;
+	
+	border: none;
+	border-radius: 14px;
+	background: transparent;
+	color: var(--text-light);
+	cursor: pointer;
+	
+	transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+.menu-item:hover { background: rgba(255, 255, 255, 0.055); }
+.menu-item:active { background: rgba(255, 255, 255, 0.08); }
+.menu-item.danger { color: var(--error); }
+.menu-item.danger:hover { background: rgba(239, 111, 108, 0.1); }
+
+/* Header Menu Divider Styles. */
+.menu-divider { height: 1px; margin: 0.45rem 0; background: rgba(255, 255, 255, 0.06); }
+
+/* ====================================
+    Header Media Query Styles.
+======================================= */
+@media (max-width: 768px)
+{
+	.nav { display: none; }
+	.header-inner { min-height: 68px; }
+}

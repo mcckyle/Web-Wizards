@@ -1,0 +1,33 @@
+/* Filename: src/components/ImageSlider/ImageSlider.css */
+
+/* ====================================
+    ImageSlider Layout Styles.
+======================================= */
+.slider
+{
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slides
+{
+    display: flex;
+	
+	transition: transform 0.5s ease-in-out infinite;
+}
+
+.slide
+{
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.img
+{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
